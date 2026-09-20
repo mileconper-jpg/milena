@@ -1,10 +1,9 @@
-import { allRoutes, languages, pageUrl } from '../content/site';
+import { allRoutes } from '../content/site';
+import { canonicalUrl, isApprovedRoute, languageAlternates } from '../lib/seo.mjs';
 
-// The existing public domain; SITE_URL can override it for another approved environment.
 export default function sitemap() {
-  const origin = process.env.SITE_URL || 'https://milenapereira.co';
-  return allRoutes().map(({ url, page }) => ({
-    url: new URL(url, origin).href,
-    alternates: { languages: Object.fromEntries(languages.map(item => [item.tag, new URL(pageUrl(item.code, page), origin).href])) },
+  return allRoutes().filter(({ language, page }) => isApprovedRoute(language, page)).map(({ url, page, language }) => ({
+    url: canonicalUrl(url),
+    alternates: { languages: languageAlternates(language, page) },
   }));
 }

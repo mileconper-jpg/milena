@@ -66,7 +66,7 @@ section[id] { scroll-margin-top: 25px; }
 .pillars p { max-width: 330px; font-size: 15px; }
 .projectGrid { margin-top: 35px; }
 .projectCard { border-top: 1px solid var(--rule); padding-top: 18px; display: flex; flex-direction: column; align-items: flex-start; }
-.projectCard h3 { font-family: var(--serif); font-size: clamp(26px, 2.7vw, 39px); line-height: 1.15; font-weight: 400; margin: 18px 0 22px; }
+.projectCard :is(h2, h3) { font-family: var(--serif); font-size: clamp(26px, 2.7vw, 39px); line-height: 1.15; font-weight: 400; margin: 18px 0 22px; }
 .projectCard .arrow { margin-top: auto; }
 .smallNote { font-size: 12px; color: var(--muted); line-height: 1.65; }
 .projects > .smallNote { max-width: 720px; margin: 28px 0 0; }
@@ -168,7 +168,7 @@ html[lang='zh-CN'] .lead, html[lang='zh-CN'] .serif, html[lang='zh-CN'] .stateme
   .hero h1 { margin: 60px 0; }
   .audienceRoute h3 { font-size: 32px; }
   .projectGrid { gap: 25px; }
-  .projectCard h3 { font-size: 27px; }
+  .projectCard :is(h2, h3) { font-size: 27px; }
   .networkIntro { gap: 40px; }
   .compactContact { display: block; }
   .compactContact .contactEmail { margin-top: 25px; }
@@ -202,7 +202,7 @@ html[lang='zh-CN'] .lead, html[lang='zh-CN'] .serif, html[lang='zh-CN'] .stateme
   .pillars article { border-top: 1px solid var(--rule); padding-top: 13px; }
   .pillars h3 { margin-top: 0; }
   .pillars p { max-width: none; margin-bottom: 8px; }
-  .projectCard h3 { font-size: 30px; margin: 14px 0 18px; }
+  .projectCard :is(h2, h3) { font-size: 30px; margin: 14px 0 18px; }
   .projectCard .kicker { margin-top: 0; }
   .networkIntro { margin: 32px 0; gap: 25px; }
   .networkIntro h3 { font-size: 13vw; }

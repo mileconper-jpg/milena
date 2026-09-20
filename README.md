@@ -39,4 +39,14 @@ Field Notes remains a coming-soon editorial destination with an email request li
 
 ## Publishing
 
-Use only the existing `main` → GitHub → Vercel workflow when publication is authorised. Canonical URLs, language alternates and the sitemap default to the existing public domain `https://milenapereira.co`; `SITE_URL` can override the origin for another approved environment. No DNS, mail records or hosting account configuration is changed by the application.
+Use only the existing `main` → GitHub → Vercel workflow when publication is authorised. Canonical URLs, language alternates and the generated sitemap use the fixed public origin `https://milenapereira.co`. No DNS, mail records or hosting account configuration is changed by the application.
+
+## Search metadata and indexing
+
+`lib/seo.mjs` owns the canonical origin, approved English homepage metadata, social card settings and linked Person, Organization and WebSite entities. Other pages retain their localized titles/descriptions. The homepage in each language includes the same verified entity graph. No social profile or preview image is fabricated; set `SOCIAL_IMAGE` only after an original image is approved.
+
+Production builds emit `index, follow` only for Home, Brands, Manufacturers, Presentation Collections, Specialists, About and Contact in English, French and Brazilian Portuguese (21 URLs). All other public pages emit `noindex, follow`, including every Italian, Spanish and Chinese page. Development and Vercel preview builds emit `noindex, follow`; a Vercel environment without a recognized production designation also remains non-indexable. These values are resolved when pages are built, so production must be built in its production environment rather than reusing a preview build. Canonicals always point to the public domain. Unknown URLs return 404 with Next.js's automatic `noindex`.
+
+`app/robots.js` permits crawling, including CSS, JavaScript and images, and advertises the production sitemap. Crawling remains permitted on previews so crawlers can read their `noindex` directive. The sitemap filters the 84 public routes to the 21 approved canonical URLs. Only those routes advertise reciprocal EN/FR/PT-BR language alternates and `x-default`; no fabricated modification dates are used.
+
+See `SEO-AUDIT.md` for validation results and the post-publication Search Console checklist. Run `npm test` and `npm run build` before publication.
