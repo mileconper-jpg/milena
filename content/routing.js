@@ -15,6 +15,8 @@ export const slugs = {
   es: { home: '', services: 'servicios', brands: 'marcas', manufacturers: 'fabricantes', presentation: 'colecciones-de-presentacion', specialists: 'especialistas', team: 'equipo', projects: 'proyectos', about: 'sobre-milena', notes: 'notas-de-campo', contact: 'contacto' },
   zh: { home: '', services: 'services', brands: 'brands', manufacturers: 'manufacturers', presentation: 'presentation-collections', specialists: 'specialists', team: 'team', projects: 'projects', about: 'about', notes: 'field-notes', contact: 'contact' },
 };
+const bookingRoutes = { en: 'book-a-call', fr: 'prendre-rendez-vous', pt: 'agendar-conversa', it: 'prenota-colloquio', es: 'reservar-llamada', zh: 'book-a-call' };
+for (const [locale, slug] of Object.entries(bookingRoutes)) slugs[locale].booking = slug;
 const intakeRoutes = {
   en: ['brand-enquiry', 'manufacturer-application', 'specialist-application'],
   fr: ['demande-marque', 'candidature-fabricant', 'candidature-specialiste'],

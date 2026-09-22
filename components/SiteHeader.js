@@ -44,6 +44,7 @@ export default function SiteHeader({ language, page, copy }) {
         </div>
       </details>
       {['team', 'projects', 'about', 'notes', 'contact'].map(key => <Link key={key} href={pageUrl(language, key)} aria-current={page === key ? 'page' : undefined}>{copy.nav[key]}</Link>)}
+      <Link className="navBooking" href={pageUrl(language, 'booking')} aria-current={page === 'booking' ? 'page' : undefined}>{copy.booking.title}</Link>
     </nav>
     <nav className="languages" aria-label={copy.ui.languages}>
       {languages.map(item => <Link key={item.code} href={pageUrl(item.code, page)} hrefLang={item.tag} lang={item.tag} aria-label={item.name} aria-current={language === item.code ? 'page' : undefined}>{item.label}</Link>)}

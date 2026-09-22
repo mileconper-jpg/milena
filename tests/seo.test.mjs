@@ -18,7 +18,8 @@ test('structured entities connect and do not fabricate reputation or contact det
   const ids = new Set(entities.map(entity => entity['@id']));
   for (const ref of [entities[0].worksFor, entities[1].employee, entities[2].publisher, entities[2].about]) assert.ok(ids.has(ref['@id']));
   assert.equal(entities[1].identifier.value, '16738640');
-  assert.doesNotMatch(JSON.stringify(data), /aggregateRating|review|telephone|streetAddress|sameAs/);
+  assert.deepEqual(entities[0].sameAs, ['https://www.linkedin.com/in/milenacp/']);
+  assert.doesNotMatch(JSON.stringify(data), /aggregateRating|review|telephone|streetAddress/);
   assert.equal(JSON.parse(serializeJsonLd({ text: '</script>' })).text, '</script>');
   assert.ok(!serializeJsonLd({ text: '</script>' }).includes('<'));
 });

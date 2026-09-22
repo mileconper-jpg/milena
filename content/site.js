@@ -1,3 +1,4 @@
+import booking from './booking';
 import en from './en';
 import fr from './fr';
 import pt from './pt';
@@ -6,13 +7,13 @@ import it from './it';
 import es from './es';
 import commercial from './commercial';
 import forms from './forms';
+import homepage from './homepage';
 
 export const dictionaries = Object.fromEntries(Object.entries({ en, fr, pt, it, es, zh }).map(([code, base]) => {
   const extra = commercial[code];
   return [code, {
-    ...base, commercial: extra, forms: forms[code],
+    ...base, commercial: extra, forms: forms[code], homepage: homepage[code], booking: booking[code],
     brandEnquiry: extra.brandEnquiry, manufacturerApplication: extra.manufacturerApplication, specialistApplication: extra.specialistApplication,
-    audience: { ...base.audience, items: base.audience.items.map((item, i) => [item[0], i === 0 ? extra.brandConcept : i === 1 ? extra.makerConcept : item[1]]) },
     brands: { ...base.brands, services: [...base.brands.services.slice(0, -1), extra.manufacturingStrategy, base.brands.services.at(-1)] },
     manufacturers: { ...base.manufacturers, services: base.manufacturers.services.slice(0, 7) },
     ui: { ...base.ui, join: extra.secondaryLink },

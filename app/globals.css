@@ -307,3 +307,86 @@ html[lang='it'] .contact h1, html[lang='it'] .contact h2, html[lang='es'] .conta
  html[lang='it'] .contact h1, html[lang='it'] .contact h2, html[lang='es'] .contact h1, html[lang='es'] .contact h2 { font-size: 9.7vw; }
 }
 @media (prefers-reduced-motion: reduce) { .arrow > span, .routeArrow, .audienceRoute h3, .contactButton, .formButton { transition: none; } .arrow:hover > span, .audienceRoute:hover .routeArrow { transform: none; } }
+
+/* Personal introduction and clear, understated contact routes. */
+.srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.heroActions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; max-width: 430px; }
+.heroActions .arrow { min-height: 48px; }
+.heroPrimary { font-weight: 700; border-bottom-width: 2px; }
+.what .pillars { margin-top: 35px; }
+.aboutMilenaGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px 8vw; margin-top: 40px; align-items: start; }
+.aboutMilena .editorialTitle { max-width: 620px; text-wrap: balance; }
+.aboutMilenaCopy { max-width: 580px; }
+.aboutMilenaCopy p { font-size: 18px; line-height: 1.65; margin: 0 0 22px; }
+.personalLinks { display: flex; flex-wrap: wrap; gap: 18px 35px; }
+.personalLinks .arrow { min-height: 48px; }
+.editorialImage { margin: 40px 0 0; overflow: hidden; aspect-ratio: 16 / 9; }
+.editorialImage img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.editorialImage--portrait { aspect-ratio: 4 / 5; margin: 0; }
+.editorialImage--portrait img { object-position: 50% 35%; }
+.hasPortrait .aboutMilenaGrid { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
+.hasPortrait .editorialImage { grid-row: 1 / 3; }
+.hasPortrait .aboutMilenaCopy { grid-column: 2; }
+.conversionActions { display: flex; align-items: center; flex-wrap: wrap; gap: 20px 35px; margin-top: 32px; }
+.conversionActions .contactButton { margin-top: 0; }
+.bookingPrimary { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.bookingPrimary:hover { background: transparent; color: var(--paper); }
+.conversionActions .arrow { min-height: 48px; }
+.bookingNote { max-width: 580px; font-size: 13px; line-height: 1.6; margin: 20px 0 0; color: #c9c5bc; }
+.contactDetails { display: flex; align-items: center; flex-wrap: wrap; gap: 20px 35px; margin-top: 28px; }
+.contactDetails .contactEmail { margin: 0; padding-block: 14px; }
+.compactSocial { grid-column: 2; justify-self: start; }
+.siteFooter > a { display: inline-flex; align-items: center; min-height: 44px; }
+.footerSocial { white-space: nowrap; gap: 10px; text-transform: uppercase; }
+#enquiry-routes { scroll-margin-top: 30px; }
+@media (max-width: 1150px) { .heroActions { max-width: 340px; } }
+@media (max-width: 900px) {
+  .heroActions { max-width: none; }
+  .aboutMilenaGrid, .hasPortrait .aboutMilenaGrid { grid-template-columns: 1fr; gap: 28px; }
+  .hasPortrait .editorialImage { grid-row: auto; max-width: 560px; }
+  .hasPortrait .aboutMilenaCopy { grid-column: auto; }
+  .aboutMilenaCopy { max-width: 650px; }
+}
+@media (max-width: 600px) {
+  .heroActions { width: 100%; gap: 12px 24px; }
+  .heroActions .arrow { flex: 1 1 130px; }
+  .aboutMilenaGrid { margin-top: 28px; }
+  .aboutMilena .editorialTitle { font-size: 30px; }
+  .aboutMilenaCopy p { font-size: 17px; line-height: 1.6; }
+  .conversionActions { align-items: stretch; flex-direction: column; gap: 15px; }
+  .conversionActions .arrow { width: 100%; min-height: 52px; }
+  .contactDetails { gap: 8px 30px; }
+  .siteFooter { gap: 12px; }
+}
+
+/* Booking follows the site's existing typographic, ruled layout. */
+.primaryNav .navBooking { border: 1px solid currentColor; padding: 12px 14px; min-height: 44px; }
+.bookingOption { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; padding: 34px 0; border-top: 1px solid var(--rule); align-items: start; }
+.bookingOption h2 { font-size: clamp(20px, 2.5vw, 32px); line-height: 1.15; text-transform: uppercase; max-width: 700px; }
+.bookingOption .kicker { margin: 14px 0; }
+.bookingOption p:not(.kicker) { max-width: 600px; }
+.bookingPanel { position: relative; margin-top: 50px; scroll-margin-top: 30px; }
+.calendarStatus { position: absolute; top: 76px; left: 0; color: var(--muted); }
+.calendarEmbed { width: 100%; min-width: 320px; height: max(700px, 85svh); }
+.calendarEmbed iframe { width: 100%; height: 100%; border: 0; }
+@media (max-width: 900px) { .primaryNav .navBooking { order: -1; } }
+@media (max-width: 600px) {
+  .bookingOption { gap: 16px; }
+  .calendarEmbed { width: 100vw; margin-left: calc(-1 * var(--gutter)); }
+}
+
+.bookingSelector { color: inherit; text-decoration: none; }
+.bookingSelector:hover { text-decoration: none; }
+.bookingSelector:hover h2 { text-decoration: underline; text-underline-offset: 6px; }
+.bookingRowHeading { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
+.bookingRowHeading .kicker { white-space: nowrap; margin: 0; }
+.bookingRowArrow { font-size: 18px; padding-top: 24px; }
+.bookingOptions:has(.bookingPanel) .bookingPanel { margin-top: 0; }
+.changeConversation { border: 0; border-bottom: 1px solid currentColor; background: none; cursor: pointer; min-height: 44px; margin-bottom: 28px; }
+.contextualBooking { display: inline-flex; margin: 24px 0 0 32px; min-height: 48px; }
+@media (max-width: 600px) {
+  .bookingSelector { grid-template-columns: minmax(0, 1fr) 18px; }
+  .bookingRowHeading { display: block; }
+  .bookingRowHeading .kicker { display: block; margin-top: 14px; }
+  .contextualBooking { margin-left: 0; display: flex; width: fit-content; }
+}
