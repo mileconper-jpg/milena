@@ -23,8 +23,8 @@ function LinkedInLink({ className = 'arrow' }) {
   return <a className={className} href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>;
 }
 function BookingLink({ copy, language, hero = false }) {
-  return <Link className={hero ? 'arrow heroPrimary' : 'contactButton bookingPrimary'} href={pageUrl(language, 'booking')}>
-    {hero ? copy.homepage.book : copy.homepage.bookIntro}<span aria-hidden="true">↗</span>
+  return <Link className={hero ? 'editorialButton editorialButtonPrimary' : 'contactButton bookingPrimary'} href={pageUrl(language, 'booking')}>
+    {hero ? copy.homepage.book : copy.homepage.bookIntro}<span aria-hidden="true">{hero ? '→' : '↗'}</span>
   </Link>;
 }
 export function Footer({ copy, language }) {
@@ -32,6 +32,14 @@ export function Footer({ copy, language }) {
 }
 function Contact({ copy, language, full = false, compact = false, intakePage, home = false, bookingType }) {
   const Heading = full ? 'h1' : 'h2';
+  if (home) return <section className="section homeContact" id="contact">
+    <h2>{copy.homepage.contactHomeTitle}</h2>
+    <p className="lead">{copy.homepage.contactHomeIntro}</p>
+    <div className="conversionActions">
+      <Link className="editorialButton editorialButtonPrimary" href={pageUrl(language, 'booking')}>{copy.homepage.book}<span aria-hidden="true">→</span></Link>
+      <Link className="editorialButton" href={`${pageUrl(language, 'contact')}#enquiry-routes`}>{copy.homepage.enquiryHome}<span aria-hidden="true">→</span></Link>
+    </div>
+  </section>;
   if (home || full) return <section className="contact dark section conversion" id="contact">
     <p className="kicker">{copy.contact.title}</p><Heading><Lines>{copy.contact.headline}</Lines></Heading>
     <p className="lead">{copy.homepage.contactIntro}</p>
@@ -42,7 +50,7 @@ function Contact({ copy, language, full = false, compact = false, intakePage, ho
   return <section className={`contact dark section ${compact ? 'compactContact' : ''}`} id="contact"><p className="kicker">{copy.contact.title}</p><Heading><Lines>{copy.contact.headline}</Lines></Heading>{!compact && <p className="lead">{copy.contact.intro}</p>}<Link className="contactButton" href={intakePage ? pageUrl(language, intakePage) : emailUrl(copy.ui.projectSubject)}>{intakePage === 'manufacturerApplication' ? copy.commercial.apply : copy.ui.discuss}<span aria-hidden="true">↗</span></Link>{(bookingType || intakePage) && <ArrowLink className="contextualBooking" href={`${pageUrl(language, 'booking')}?type=${bookingType || (intakePage === 'brandEnquiry' ? 'brand' : 'manufacturer')}`}>{copy.homepage.book}</ArrowLink>}{full && <div className="contactRoutes">{['brandEnquiry', 'manufacturerApplication', 'specialistApplication'].map(key => <ArrowLink key={key} href={pageUrl(language, key)}>{copy[key].title}</ArrowLink>)}</div>}<a className="contactEmail" href={`mailto:${email}`}>{email}</a><LinkedInLink className="arrow compactSocial"/></section>;
 }
 function Audience({ copy, language }) {
-  return <section className="audience section" id="audiences"><SectionTitle number="01">{copy.audience.title}</SectionTitle><div className="audienceRoutes">{copy.audience.items.slice(0, 2).map(([title, description], index) => <Link className="audienceRoute" key={title} href={pageUrl(language, ['brands', 'manufacturers', 'specialists'][index])}><span className="routeNumber" aria-hidden="true">0{index + 1}</span><div><h3>{title}</h3><p>{description}</p></div><span className="routeArrow" aria-hidden="true">↗</span></Link>)}</div></section>;
+  return <section className="audience section" id="audiences"><SectionTitle>{copy.audience.title}</SectionTitle><div className="audienceRoutes">{copy.homepage.audienceItems.map(([title, description], index) => <Link className="audienceRoute" key={title} href={pageUrl(language, ['brands', 'manufacturers', 'specialists'][index])}><div><h3>{title}</h3><p>{description}</p></div><span className="routeArrow" aria-hidden="true">→</span></Link>)}</div></section>;
 }
 function ProjectModels({ copy, language, preview = false }) {
   const Heading = preview ? 'h3' : 'h2';
@@ -68,24 +76,25 @@ function Related({ copy, language, pages }) {
 }
 function AboutMilena({ copy, language }) {
   return <section className={`section aboutMilena ${EDITORIAL_IMAGES.portrait ? 'hasPortrait' : ''}`} id="about-milena">
-    <SectionTitle number="03">{copy.ui.about}</SectionTitle>
+    <SectionTitle>{copy.ui.about}</SectionTitle>
     <div className="aboutMilenaGrid">
       <EditorialImage asset={EDITORIAL_IMAGES.portrait} language={language} variant="portrait"/>
       <h3 className="editorialTitle">{copy.homepage.aboutTitle}</h3>
-      <div className="aboutMilenaCopy"><p>{copy.homepage.aboutBody || copy.about.paragraphs[0]}</p><p>{copy.homepage.aboutLocation}</p>
+      <div className="aboutMilenaCopy"><p>{copy.homepage.aboutBody || copy.about.paragraphs[0]}</p>
         <div className="personalLinks"><ArrowLink href={pageUrl(language, 'about')}>{copy.ui.about}</ArrowLink><LinkedInLink/></div>
       </div>
     </div>
   </section>;
 }
+function What({ copy, language }) {
+  return <section className="section what"><SectionTitle number="02">{copy.what.title}</SectionTitle><div className="pillars">{copy.what.pillars.map(([title, body], index) => <article key={title}><h3>{title}</h3><p>{body}</p><ArrowLink label={`${copy.ui.explore}: ${title}`} href={pageUrl(language, index === 2 ? 'manufacturers' : 'brands')}>{copy.ui.explore}</ArrowLink></article>)}</div></section>;
+}
 function Home({ copy, language }) {
   return <>
-    <section className="hero"><p className="eyebrow">{copy.hero.eyebrow}</p><h1>{copy.hero.lines.map(line => <span key={line}>{line}</span>)}</h1><div className="heroBottom"><p>{copy.homepage.intro}</p><div className="heroActions"><ArrowLink className="heroPrimary" href={`${pageUrl(language, 'contact')}#enquiry-routes`}>{copy.ui.discuss}</ArrowLink><BookingLink copy={copy} language={language} hero/></div></div><p className="places">{copy.hero.places}</p></section>
+    <section className="hero"><h1>{copy.hero.lines.map(line => <span key={line}>{line}</span>)}</h1><div className="heroBottom"><p>{copy.homepage.intro}</p><div className="heroActions"><BookingLink copy={copy} language={language} hero/></div></div><p className="places">{copy.hero.places}</p></section>
     <Audience copy={copy} language={language}/>
-    <section className="section what"><SectionTitle number="02">{copy.what.title}</SectionTitle><div className="pillars">{copy.what.pillars.map(([title, body], index) => <article key={title}><h3>{title}</h3><p>{body}</p><ArrowLink label={`${copy.ui.explore}: ${title}`} href={pageUrl(language, index === 2 ? 'manufacturers' : 'brands')}>{copy.ui.explore}</ArrowLink></article>)}</div></section>
+
     <AboutMilena copy={copy} language={language}/>
-    <Network copy={copy} language={language}/>
-    <ProjectModels copy={copy} language={language} preview/>
     <Contact copy={copy} language={language} home/>
   </>;
 }

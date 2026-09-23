@@ -390,3 +390,39 @@ html[lang='it'] .contact h1, html[lang='it'] .contact h2, html[lang='es'] .conta
   .bookingRowHeading .kicker { display: block; margin-top: 14px; }
   .contextualBooking { margin-left: 0; display: flex; width: fit-content; }
 }
+
+/* Clear homepage routes and a shared, square editorial button treatment. */
+.editorialButton { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 52px; padding: 18px 26px; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); border-radius: 0; font-size: 11px; font-weight: 600; line-height: 1.4; letter-spacing: .07em; text-transform: uppercase; }
+.editorialButton:hover { background: var(--ink); color: var(--paper); text-decoration: none; }
+.editorialButtonPrimary { background: var(--ink); color: var(--paper); }
+.editorialButtonPrimary:hover { background: var(--paper); color: var(--ink); }
+.primaryNav .navBooking { padding: 15px 20px; border: 1px solid var(--ink); border-radius: 0; }
+.primaryNav .navBooking:hover { background: var(--ink); color: var(--paper); text-decoration: none; }
+.audienceRoutes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.audienceRoute { grid-template-columns: minmax(0, 1fr) 24px; align-items: start; gap: 16px; padding: 32px 26px; border: 1px solid var(--ink); }
+.audienceRoute h3 { font-size: clamp(23px, 2.25vw, 34px); line-height: 1.15; }
+.audienceRoute p { font-size: 17px; line-height: 1.5; }
+.audienceRoute .routeArrow { font-size: 24px; }
+.audienceRoute:hover { background: var(--ink); color: var(--paper); }
+.audienceRoute:hover h3 { text-decoration: none; }
+.audienceRoute:hover .routeArrow { transform: none; }
+.homeContact { border-top: 1px solid var(--rule); }
+.homeContact h2 { font-size: clamp(45px, 7vw, 110px); font-weight: 500; line-height: 1.05; letter-spacing: -.05em; margin: 0 0 28px; }
+.homeContact .lead { font-family: var(--serif); font-size: 23px; max-width: 690px; }
+@media (min-width: 901px) and (max-width: 1250px) {
+  .siteHeader { flex-wrap: wrap; gap: 12px 24px; }
+  .primaryNav { order: 3; flex-basis: 100%; justify-content: space-between; }
+  .languages { margin-left: auto; }
+}
+@media (max-width: 900px) {
+  .audienceRoutes { grid-template-columns: 1fr; }
+  .audienceRoute { padding: 28px; }
+  .audienceRoute h3 { font-size: 30px; }
+  .primaryNav .navBooking { order: 0; margin-top: 12px; }
+}
+@media (max-width: 600px) {
+  .audienceRoute { padding: 25px 22px; }
+  .audienceRoute h3 { font-size: 25px; }
+  .heroActions .editorialButton, .homeContact .editorialButton { width: 100%; }
+  .homeContact .lead { font-size: 20px; }
+}
