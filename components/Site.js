@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import { experience, experienceLabels, serviceDetails, serviceImages } from '../content/refinements';
 import BookingOptions, { BookingChoices } from './BookingOptions';
 import Link from 'next/link';
 import EditorialImage from './EditorialImage';
@@ -10,14 +11,14 @@ import { email, emailUrl, pageUrl, projectDestinations, teamProfiles } from '../
 export function ArrowLink({ href, children, className = '', label }) {
   return <Link className={`arrow ${className}`} href={href} aria-label={label}>{children}<span aria-hidden="true">↗</span></Link>;
 }
-export function SectionTitle({ children, number }) {
-  return <div className="sectionTitle">{number && <span aria-hidden="true">{number}</span>}<h2>{children}</h2></div>;
+export function SectionTitle({ children }) {
+  return <div className="sectionTitle"><h2>{children}</h2></div>;
 }
 function Lines({ children }) {
   return children.split('\n').map(line => <span key={line}>{line}</span>);
 }
-function PageIntro({ label, headline, intro }) {
-  return <section className="pageIntro"><p className="kicker">{label}</p><h1><Lines>{headline}</Lines></h1>{intro && <p className="lead">{intro}</p>}</section>;
+function PageIntro({ label, headline, intro, className = '' }) {
+  return <section className={`pageIntro ${className}`}><p className="kicker">{label}</p><h1><Lines>{headline}</Lines></h1>{intro && <p className="lead">{intro}</p>}</section>;
 }
 function LinkedInLink({ className = 'arrow' }) {
   return <a className={className} href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>;
@@ -54,16 +55,16 @@ function Audience({ copy, language }) {
 }
 function ProjectModels({ copy, language, preview = false }) {
   const Heading = preview ? 'h3' : 'h2';
-  return <section className="section projects" id="project-models">{preview && <SectionTitle number="05">{copy.projects.title}</SectionTitle>}<div className="projectGrid">{copy.projects.items.map((project, index) => <article className="projectCard" key={project.title}><p className="kicker">{project.audience}</p><Heading>{project.title}</Heading>{!preview && <p>{project.description}</p>}<ArrowLink label={`${copy.ui.explore}: ${project.title}`} href={pageUrl(language, preview ? 'projects' : projectDestinations[index])}>{copy.ui.explore}</ArrowLink></article>)}</div>{preview && <p className="smallNote">{copy.projects.intro}</p>}</section>;
+  return <section className="section projects" id="project-models">{preview && <SectionTitle>{copy.projects.title}</SectionTitle>}<div className="projectGrid">{copy.projects.items.map((project, index) => <article className="projectCard" key={project.title}><p className="kicker">{project.audience}</p><Heading>{project.title}</Heading>{!preview && <p>{project.description}</p>}<ArrowLink label={`${copy.ui.explore}: ${project.title}`} href={pageUrl(language, preview ? 'projects' : projectDestinations[index])}>{copy.ui.explore}</ArrowLink></article>)}</div>{preview && <p className="smallNote">{copy.projects.intro}</p>}</section>;
 }
 function Network({ copy, language }) {
-  return <section className="network section dark" id="network"><SectionTitle number="04">{copy.network.title}</SectionTitle><div className="networkIntro"><h3><Lines>{copy.network.headline}</Lines></h3><p className="serif">{copy.network.intro}</p></div><div className="networkDetails"><div><p className="kicker">{copy.network.manufacturing}</p><p className="marketNames">{copy.network.countries}</p></div><div><p className="kicker">{copy.network.sales}</p><p className="marketNames">{copy.network.markets}</p></div></div><p className="smallNote">{copy.network.note}</p><EditorialImage asset={EDITORIAL_IMAGES.manufacturing} language={language}/></section>;
+  return <section className="network section dark" id="network"><SectionTitle>{copy.network.title}</SectionTitle><div className="networkIntro"><h3><Lines>{copy.network.headline}</Lines></h3><p className="serif">{copy.network.intro}</p></div><div className="networkDetails"><div><p className="kicker">{copy.network.manufacturing}</p><p className="marketNames">{copy.network.countries}</p></div><div><p className="kicker">{copy.network.sales}</p><p className="marketNames">{copy.network.markets}</p></div></div><p className="smallNote">{copy.network.note}</p><EditorialImage asset={EDITORIAL_IMAGES.manufacturing} language={language}/></section>;
 }
 function FieldNotes({ copy, language, preview = false }) {
-  return <section className="section notes">{preview && <SectionTitle number="06">{copy.notes.title}</SectionTitle>}<div className="editorialSplit"><div><p className="kicker">{copy.notes.coming}</p>{preview ? <h3 className="editorialTitle"><Lines>{copy.notes.headline}</Lines></h3> : <ul className="topicList">{copy.notes.topics.map(topic => <li key={topic}>{topic}</li>)}</ul>}</div><div><p className="serif">{copy.notes.intro}</p>{preview ? <ArrowLink href={pageUrl(language, 'notes')}>{copy.notes.explore}</ArrowLink> : <><p>{copy.notes.body}</p><ArrowLink href={emailUrl(copy.notes.subject, copy.notes.request)}>{copy.notes.subscribe}</ArrowLink><p className="smallNote">{copy.notes.note}</p></>}</div></div></section>;
+  return <section className="section notes">{preview && <SectionTitle>{copy.notes.title}</SectionTitle>}<div className="editorialSplit"><div><p className="kicker">{copy.notes.coming}</p>{preview ? <h3 className="editorialTitle"><Lines>{copy.notes.headline}</Lines></h3> : <ul className="topicList">{copy.notes.topics.map(topic => <li key={topic}>{topic}</li>)}</ul>}</div><div><p className="serif">{copy.notes.intro}</p>{preview ? <ArrowLink href={pageUrl(language, 'notes')}>{copy.notes.explore}</ArrowLink> : <><p>{copy.notes.body}</p><ArrowLink href={emailUrl(copy.notes.subject, copy.notes.request)}>{copy.notes.subscribe}</ArrowLink><p className="smallNote">{copy.notes.note}</p></>}</div></div></section>;
 }
 function Approach({ copy }) {
-  return <section className="section approach"><SectionTitle>{copy.ui.approach}</SectionTitle><ol className="stages">{copy.stages.map(([title, description]) => <li key={title}><h3>{title}</h3><p>{description}</p></li>)}</ol></section>;
+  return <section className="section approach"><SectionTitle>{copy.ui.approach}</SectionTitle><ul className="stages">{copy.stages.map(([title, description]) => <li key={title}><h3>{title}</h3><p>{description}</p></li>)}</ul></section>;
 }
 function WorkingModel({ copy }) {
   return <section className="section workingModel editorialSplit"><h2 className="editorialTitle"><Lines>{copy.working.title}</Lines></h2><div><p className="serif">{copy.working.body}</p><p>{copy.working.commercial}</p></div></section>;
@@ -73,6 +74,20 @@ function PresentationFeature({ copy, language }) {
 }
 function Related({ copy, language, pages }) {
   return <nav className="section related" aria-label={copy.ui.related}><p className="kicker">{copy.ui.related}</p>{pages.map(page => <ArrowLink key={page} href={pageUrl(language, page)}>{copy[page].title}</ArrowLink>)}</nav>;
+}
+function SelectedExperience({ language }) {
+  const [title, headline, note] = experienceLabels[language];
+  return <section className="section selectedExperience">
+    <SectionTitle>{title}</SectionTitle><p className="experienceHeading">{headline}</p>
+    <ul className="experienceCredits">{experience.map(item => <li key={item.name}>{item.logo ? <EditorialImage asset={item.logo} language={language}/> : item.name}</li>)}</ul>
+    <p className="smallNote">{note}</p>
+  </section>;
+}
+function ServiceDescriptions({ items }) {
+  return <ul className="serviceDescriptions">{items.map(([title, text]) => <li key={title}><h3>{title}</h3><p>{text}</p></li>)}</ul>;
+}
+function ProjectScoping() {
+  return <section className="section projectScoping editorialSplit"><h2 className="editorialTitle">Project scoping</h2><p>Every project is scoped individually according to the brief, complexity, timeline and specialist team required. Following an initial conversation, I provide a clear scope, deliverables, timeline and fee proposal.</p></section>;
 }
 function AboutMilena({ copy, language }) {
   return <section className={`section aboutMilena ${EDITORIAL_IMAGES.portrait ? 'hasPortrait' : ''}`} id="about-milena">
@@ -87,12 +102,13 @@ function AboutMilena({ copy, language }) {
   </section>;
 }
 function What({ copy, language }) {
-  return <section className="section what"><SectionTitle number="02">{copy.what.title}</SectionTitle><div className="pillars">{copy.what.pillars.map(([title, body], index) => <article key={title}><h3>{title}</h3><p>{body}</p><ArrowLink label={`${copy.ui.explore}: ${title}`} href={pageUrl(language, index === 2 ? 'manufacturers' : 'brands')}>{copy.ui.explore}</ArrowLink></article>)}</div></section>;
+  return <section className="section what"><SectionTitle>{copy.what.title}</SectionTitle><div className="pillars">{copy.what.pillars.map(([title, body], index) => <article key={title}><h3>{title}</h3><p>{body}</p><ArrowLink label={`${copy.ui.explore}: ${title}`} href={pageUrl(language, index === 2 ? 'manufacturers' : 'brands')}>{copy.ui.explore}</ArrowLink></article>)}</div></section>;
 }
 function Home({ copy, language }) {
   return <>
     <section className="hero"><h1>{copy.hero.lines.map(line => <span key={line}>{line}</span>)}</h1><div className="heroBottom"><p>{copy.homepage.intro}</p><div className="heroActions"><BookingLink copy={copy} language={language} hero/></div></div><p className="places">{copy.hero.places}</p></section>
     <Audience copy={copy} language={language}/>
+    <SelectedExperience language={language}/>
 
     <AboutMilena copy={copy} language={language}/>
     <Contact copy={copy} language={language} home/>
@@ -101,12 +117,17 @@ function Home({ copy, language }) {
 function AudiencePage({ copy, language, page }) {
   const content = copy[page];
   const maker = page === 'manufacturers';
+  const detailed = language === 'en';
   return <>
-    <PageIntro label={content.title} headline={content.headline} intro={content.intro}/>
-    {maker ? <nav className="section commercialChoices" aria-label={copy.ui.services}><a href="#development">01: {copy.commercial.developmentTitle} ↓</a><a href="#representation">02: {copy.commercial.representationTitle} ↓</a></nav> : <section className="section brandChallenge"><p className="serif">{copy.commercial.brandIntro}</p><ArrowLink href={pageUrl(language, 'brandEnquiry')}>{copy.ui.discuss}</ArrowLink></section>}
-    <section className="section serviceSection" id="development"><SectionTitle>{maker ? copy.commercial.developmentTitle : copy.ui.services}</SectionTitle>{maker && <p className="sectionLead serif">{copy.commercial.developmentIntro}</p>}<ol className="serviceList">{content.services.map(item => <li key={item}>{item}</li>)}</ol></section>
-    {maker && <><PresentationFeature copy={copy} language={language}/><section className="section dark representation" id="representation"><p className="kicker">02</p><h2 className="editorialTitle">{copy.commercial.representationTitle}</h2><div className="editorialSplit"><p className="serif">{copy.commercial.representationIntro}</p><div><p>{copy.commercial.representationBody}</p><p className="smallNote">{copy.commercial.selection}</p><ArrowLink href={pageUrl(language, 'manufacturerApplication')}>{copy.commercial.apply}</ArrowLink></div></div></section></>}
-    <Approach copy={copy}/><WorkingModel copy={copy}/><Related copy={copy} language={language} pages={maker ? ['presentation', 'projects'] : ['projects', 'team']}/><Contact copy={copy} language={language} compact intakePage={maker ? 'manufacturerApplication' : 'brandEnquiry'}/>
+    <PageIntro label={content.title} headline={content.headline} intro={content.intro} className={maker ? '' : 'brandIntro'}/>
+    {maker && detailed ? <nav className="section commercialChoices" aria-label={copy.ui.services}><a href="#development">Product & Collection Development ↓</a><a href="#representation">International Business Development ↓</a></nav> : maker ? <nav className="section commercialChoices" aria-label={copy.ui.services}><a href="#development">{copy.commercial.developmentTitle} ↓</a><a href="#representation">{copy.commercial.representationTitle} ↓</a></nav> : <section className="section brandChallenge"><p className="serif">{copy.commercial.brandIntro}</p><ArrowLink href={pageUrl(language, 'brandEnquiry')}>{copy.ui.discuss}</ArrowLink></section>}
+    <section className="section serviceSection" id="development"><SectionTitle>{maker ? (detailed ? 'Product & Collection Development' : copy.commercial.developmentTitle) : copy.ui.services}</SectionTitle>{maker && <p className="sectionLead serif">{detailed ? 'Build a stronger product offer around the manufacturer’s real capabilities.' : copy.commercial.developmentIntro}</p>}{detailed ? <ServiceDescriptions items={serviceDetails[page]}/> : <ul className="serviceList">{content.services.map(item => <li key={item}>{item}</li>)}</ul>}</section>
+    {/* Optional owned editorial imagery, configured in content/refinements.js. */}
+    {serviceImages[page] && <section className="section serviceImagery"><EditorialImage asset={serviceImages[page]} language={language}/></section>}
+    {maker && detailed ? <section className="section dark representation" id="representation"><h2 className="editorialTitle">International Business Development</h2><p className="sectionLead serif">Present those capabilities to the right brands, buyers and markets.</p><ServiceDescriptions items={serviceDetails.representation}/><p className="smallNote">{copy.commercial.selection}</p><ArrowLink href={pageUrl(language, 'manufacturerApplication')}>{copy.commercial.apply}</ArrowLink></section> : maker && <><PresentationFeature copy={copy} language={language}/><section className="section dark representation" id="representation"><h2 className="editorialTitle">{copy.commercial.representationTitle}</h2><div className="editorialSplit"><p className="serif">{copy.commercial.representationIntro}</p><div><p>{copy.commercial.representationBody}</p><p className="smallNote">{copy.commercial.selection}</p><ArrowLink href={pageUrl(language, 'manufacturerApplication')}>{copy.commercial.apply}</ArrowLink></div></div></section></>}
+    <Approach copy={copy}/>{detailed ? <ProjectScoping/> : <WorkingModel copy={copy}/>}
+    <Related copy={copy} language={language} pages={maker ? ['presentation', 'projects'] : ['projects', 'team']}/>
+    {detailed ? <section className="section dark serviceBooking"><h2 className="editorialTitle">Let’s talk.</h2><Link className="editorialButton" href={`${pageUrl(language, 'booking')}?type=${maker ? 'manufacturer' : 'brand'}`}>{maker ? 'Book a Manufacturer & Business Development Call' : 'Book a Brand & Product Development Call'}<span aria-hidden="true">→</span></Link></section> : <Contact copy={copy} language={language} compact intakePage={maker ? 'manufacturerApplication' : 'brandEnquiry'}/>}
   </>;
 }
 function Team({ copy, language }) {
@@ -122,8 +143,8 @@ export default function SitePage({ route }) {
   if (page === 'contact') return <Contact copy={copy} language={language} full/>;
   if (page === 'projects') return <><PageIntro label={copy.nav.projects} headline={copy.projects.title} intro={copy.projects.intro}/><ProjectModels copy={copy} language={language}/><Contact copy={copy} language={language} compact/></>;
   if (page === 'notes') return <><PageIntro label={copy.notes.title} headline={copy.notes.headline}/><FieldNotes copy={copy} language={language}/></>;
-  if (page === 'about') return <><PageIntro label={copy.about.title} headline={copy.about.headline}/><section className="section aboutBody"><div className="editorialSplit"><p className="serif">{copy.about.paragraphs[0]}</p><p className="serif">{copy.about.paragraphs[1]}</p></div><p className="credentials">{copy.about.strip}</p></section><WorkingModel copy={copy}/><Related copy={copy} language={language} pages={['team', 'projects']}/><Contact copy={copy} language={language} compact/></>;
+  if (page === 'about') return <><PageIntro label={copy.about.title} headline={copy.about.headline}/><section className="section aboutBody"><div className="editorialSplit"><p className="serif">{copy.about.paragraphs[0]}</p><p className="serif">{copy.about.paragraphs[1]}</p></div><p className="credentials">{copy.about.strip}</p></section><SelectedExperience language={language}/><WorkingModel copy={copy}/><Related copy={copy} language={language} pages={['team', 'projects']}/><Contact copy={copy} language={language} compact/></>;
   if (page === 'presentation') return <><PageIntro label={copy.presentation.eyebrow} headline={copy.presentation.title} intro={copy.presentation.intro}/><section className="section editorialSplit presentationScope"><p className="serif">{copy.presentation.scope}</p><aside><p className="kicker">{copy.presentation.exampleLabel}</p><p className="serif">{copy.presentation.example}</p></aside></section><Approach copy={copy}/><Related copy={copy} language={language} pages={['manufacturers', 'projects']}/><Contact copy={copy} language={language} compact bookingType="manufacturer"/></>;
-  if (page === 'specialists') return <><PageIntro label={copy.specialists.title} headline={copy.specialists.headline} intro={copy.specialists.intro}/><section className="section"><SectionTitle>{copy.specialists.areasTitle}</SectionTitle><ul className="serviceList specialistAreas">{copy.specialists.areas.map(area => <li key={area}>{area}</li>)}</ul></section><section className="section specialistInvite editorialSplit"><h2 className="editorialTitle">{copy.ui.join}</h2><div><p className="serif">{copy.specialists.body}</p><p className="smallNote">{copy.specialists.note}</p><ArrowLink href={pageUrl(language, 'specialistApplication')}>{copy.ui.join}</ArrowLink></div></section><Related copy={copy} language={language} pages={['team']}/></>;
+  if (page === 'specialists') return <><PageIntro label={copy.specialists.title} headline={copy.specialists.headline} intro={copy.specialists.intro}/><section className="section"><SectionTitle>{copy.specialists.areasTitle}</SectionTitle><ul className="serviceList specialistAreas">{copy.specialists.areas.map(area => <li key={area}>{area}</li>)}</ul></section><section className="section specialistInvite editorialSplit"><h2 className="editorialTitle">{copy.ui.join}</h2><div><p className="serif">{copy.specialists.body}</p><p className="smallNote">{copy.specialists.note}</p><ArrowLink href={pageUrl(language, 'specialistApplication')}>{language === 'en' ? 'Apply to work with me' : copy.ui.join}</ArrowLink></div></section><Related copy={copy} language={language} pages={['team']}/></>;
   return <><PageIntro label={copy.services.title} headline={copy.services.headline} intro={copy.services.intro}/><section className="section serviceRoutes">{['brands', 'manufacturers', 'presentation'].map(key => <article key={key}><h2 className="editorialTitle">{copy[key].title}</h2><div><p>{copy[key].intro}</p><ArrowLink label={`${copy.ui.learn}: ${copy[key].title}`} href={pageUrl(language, key)}>{copy.ui.learn}</ArrowLink></div></article>)}</section><Contact copy={copy} language={language} compact/></>;
 }

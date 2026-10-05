@@ -1,5 +1,6 @@
 export default {
   "en": {
+    "retry": "Retry calendar",
     "title": "Book a call",
     "headline": "LET’S TALK.",
     "intro": "Choose the conversation most relevant to your project or business.",
@@ -29,6 +30,7 @@ export default {
     "change": "Change conversation"
   },
   "fr": {
+    "retry": "Réessayer",
     "title": "Prendre rendez-vous",
     "headline": "PARLONS-EN.",
     "intro": "Choisissez l’échange qui correspond à votre projet ou à votre activité.",
@@ -58,6 +60,7 @@ export default {
     "change": "Changer de conversation"
   },
   "pt": {
+    "retry": "Tentar novamente",
     "title": "Agendar uma conversa",
     "headline": "VAMOS CONVERSAR.",
     "intro": "Escolha a conversa mais adequada ao seu projeto ou negócio.",
@@ -87,6 +90,7 @@ export default {
     "change": "Escolher outra conversa"
   },
   "it": {
+    "retry": "Riprova",
     "title": "Prenota un colloquio",
     "headline": "PARLIAMONE.",
     "intro": "Scegli il colloquio più adatto al tuo progetto o alla tua attività.",
@@ -116,6 +120,7 @@ export default {
     "change": "Cambia colloquio"
   },
   "es": {
+    "retry": "Volver a intentar",
     "title": "Concertar una llamada",
     "headline": "HABLEMOS.",
     "intro": "Elige la conversación más adecuada para tu proyecto o negocio.",
@@ -145,6 +150,7 @@ export default {
     "change": "Cambiar conversación"
   },
   "zh": {
+    "retry": "重试加载日历",
     "title": "预约通话",
     "headline": "聊一聊。",
     "intro": "请选择与您的项目或业务相关的会谈。",

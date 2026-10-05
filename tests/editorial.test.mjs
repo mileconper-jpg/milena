@@ -8,11 +8,12 @@ import es from '../content/es.js';
 import zh from '../content/zh.js';
 import booking from '../content/booking.js';
 import homepage from '../content/homepage.js';
+import { experienceLabels, serviceDetails } from '../content/refinements.js';
 import commercial from '../content/commercial.js';
 import forms from '../content/forms.js';
 
 test('all localized copy, including forms and email drafts, is free of em dashes', () => {
-  assert.doesNotMatch(JSON.stringify({ en, fr, pt, it, es, zh, homepage, commercial, forms, booking }), /\u2014/);
+  assert.doesNotMatch(JSON.stringify({ en, fr, pt, it, es, zh, homepage, commercial, forms, booking, experienceLabels, serviceDetails }), /\u2014/);
 });
 
 test('approved brand headlines and factual identity survive editorial edits', () => {

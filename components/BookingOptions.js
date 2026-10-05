@@ -14,6 +14,7 @@ export default function BookingOptions({ copy, language }) {
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const calendar = useRef(null);
   const panel = useRef(null);
   const options = copy.options.map(option => ({ ...option, url: calendlyUrl(option.id, language) }));
@@ -46,19 +47,24 @@ export default function BookingOptions({ copy, language }) {
   useEffect(() => {
     setLoaded(false);
     setFailed(false);
+    setAttempt(0);
   }, [active?.url]);
   useEffect(() => {
     if (!active?.url || loaded) return;
-    const timeout = window.setTimeout(() => setFailed(true), 20000);
+    const timeout = window.setTimeout(() => {
+      if (ready && attempt === 0) setAttempt(1);
+      else setFailed(true);
+    }, 20000);
     return () => window.clearTimeout(timeout);
-  }, [active?.url, loaded]);
+  }, [active?.url, loaded, ready, attempt]);
   useEffect(() => {
     if (!active?.url || !ready || !window.Calendly || !calendar.current) return;
     const container = calendar.current;
     setLoaded(false);
+    setFailed(false);
     function onMessage(event) {
       if (event.origin !== 'https://calendly.com' || event.source !== container.querySelector('iframe')?.contentWindow) return;
-      if (event.data?.event === 'calendly.event_type_viewed') {
+      if (['calendly.event_type_viewed', 'calendly.date_and_time_selected', 'calendly.event_scheduled'].includes(event.data?.event)) {
         setLoaded(true);
         setFailed(false);
       }
@@ -70,7 +76,7 @@ export default function BookingOptions({ copy, language }) {
     const observer = new MutationObserver(labelFrame);
     observer.observe(container, { childList: true });
     return () => { window.removeEventListener('message', onMessage); observer.disconnect(); container.replaceChildren(); };
-  }, [active?.url, active?.title, ready, copy.title]);
+  }, [active?.url, active?.title, ready, copy.title, attempt]);
   useEffect(() => {
     if (!selected) return;
     panel.current?.querySelector('button')?.focus({ preventScroll: true });
@@ -89,6 +95,11 @@ export default function BookingOptions({ copy, language }) {
     {active?.url && <section id="booking-calendar" className="bookingPanel" ref={panel} aria-label={active.title}>
       <button className="arrow changeConversation" onClick={changeConversation}><span aria-hidden="true">←</span>{copy.change}</button>
       {!loaded && <p className="calendarStatus" role="status">{failed ? copy.error : copy.loading}</p>}
+      {failed && !loaded && <button className="arrow" onClick={() => {
+        if (!ready) { window.location.reload(); return; }
+        setFailed(false);
+        setAttempt(current => current + 1);
+      }}>{copy.retry}</button>}
       <div className="calendarEmbed" ref={calendar}/>
       <Script src="https://assets.calendly.com/assets/external/widget.js" strategy="afterInteractive" onReady={() => setReady(true)} onError={() => setFailed(true)}/>
     </section>}
