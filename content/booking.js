@@ -24,7 +24,7 @@ export default {
         "id": "intro",
         "title": "Introduction / Partnership",
         "description": "For collaborations, partnerships and other relevant business opportunities.",
-        "duration": 20
+        "duration": 30
       }
     ],
     "change": "Change conversation"
@@ -54,7 +54,7 @@ export default {
         "id": "intro",
         "title": "Premier contact / Partenariat",
         "description": "Pour les collaborations, partenariats et autres projets professionnels. Un premier échange pour envisager une collaboration.",
-        "duration": 20
+        "duration": 30
       }
     ],
     "change": "Changer de conversation"
@@ -84,7 +84,7 @@ export default {
         "id": "intro",
         "title": "Primeiro contato / Parceria",
         "description": "Para colaborações, parcerias e outras propostas de negócios. Uma breve conversa inicial para avaliar como podemos trabalhar juntos.",
-        "duration": 20
+        "duration": 30
       }
     ],
     "change": "Escolher outra conversa"
@@ -114,7 +114,7 @@ export default {
         "id": "intro",
         "title": "Primo contatto / Partnership",
         "description": "Per collaborazioni, partnership e altre proposte professionali. Un breve colloquio iniziale per valutare come lavorare insieme.",
-        "duration": 20
+        "duration": 30
       }
     ],
     "change": "Cambia colloquio"
@@ -144,7 +144,7 @@ export default {
         "id": "intro",
         "title": "Primer contacto / Colaboración",
         "description": "Para colaboraciones, alianzas y otras propuestas de negocio. Una breve conversación inicial para valorar cómo trabajar juntos.",
-        "duration": 20
+        "duration": 30
       }
     ],
     "change": "Cambiar conversación"
@@ -174,7 +174,7 @@ export default {
         "id": "intro",
         "title": "初步交流 / 合作",
         "description": "适用于合作项目、合作伙伴关系及其他业务洽谈。通过简短的初步交流，探讨合作方式。",
-        "duration": 20
+        "duration": 30
       }
     ],
     "change": "更换会谈类型"

@@ -6,8 +6,8 @@ import { routeRobots, languageAlternates } from '../lib/seo.mjs';
 
 test('all locales use the approved live events and remain noindex', () => {
   for (const language of Object.keys(copy)) {
-    assert.deepEqual(copy[language].options.map(x => x.duration), [30, 30, 20]);
-    const events = { brand: 'brand-product-development', manufacturer: 'manufacturer-business-development', intro: 'introduction-partnership' };
+    assert.deepEqual(copy[language].options.map(x => x.duration), [30, 30, 30]);
+    const events = { brand: 'introduction-partnership', manufacturer: 'introduction-partnership', intro: 'introduction-partnership' };
     for (const option of copy[language].options) assert.equal(calendlyUrl(option.id, language), `https://calendly.com/milenapereira/${events[option.id]}`);
     assert.deepEqual(routeRobots(language, 'booking', { NODE_ENV: 'production' }), { index: false, follow: true });
     assert.equal(languageAlternates(language, 'booking'), undefined);
